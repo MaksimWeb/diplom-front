@@ -1,0 +1,20 @@
+.icon {
+    margin-right: 20px;
+}
+
+.button__group {
+    position: relative;
+    left: 40%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    color: #fff;
+    border: none !important;
+}
+
+.link {
+    text-decoration: none;
+}
