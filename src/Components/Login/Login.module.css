@@ -1,0 +1,22 @@
+.form {
+    width: 200px;
+    margin-top: 10%;
+    margin-left: 50%;
+    background: #fafafa;
+    padding: 15px;
+}
+
+.h1 {
+    width: 100%;
+    background: #6479db;
+    color: #fff;
+    text-align: center;
+    border: 1px solid #6479db;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.button {
+    text-align: center;
+    margin-left: 25% !important;
+}

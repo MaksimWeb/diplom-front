@@ -24,6 +24,11 @@ export const Navbar: React.FC = () => {
                                 <Typography variant='h5' className={style.button}>Список документов</Typography>
                             </NavLink>
                         </MenuItem>
+                        <MenuItem>
+                            <NavLink className={style.link} to='/login'>
+                                <Typography variant='h5' className={style.button}>Войти в приложение</Typography>
+                            </NavLink>
+                        </MenuItem>
                     </MenuList>
                 </Toolbar>
             </AppBar>
