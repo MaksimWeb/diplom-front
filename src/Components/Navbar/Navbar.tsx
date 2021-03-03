@@ -5,7 +5,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import style from './Navbar.module.css'
 import {NavLink} from 'react-router-dom';
 
-export const Navbar: React.FC = () => {
+
+export const Navbar: React.FC = (props) => {
     return (
         <div>
             <AppBar>

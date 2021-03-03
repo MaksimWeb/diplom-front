@@ -20,3 +20,13 @@
     text-align: center;
     margin-left: 25% !important;
 }
+
+.input {
+    margin-bottom: 10px !important;
+}
+
+.icon {
+    position: absolute;
+    top: 61.5%;
+    right: 41%;
+}

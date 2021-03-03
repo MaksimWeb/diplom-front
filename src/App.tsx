@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {ComputerList} from "./Components/Computers/ComputersList";
 import {Route} from 'react-router-dom';
-import {Header} from './Components/Header/Header';
+import Header from './Components/Header/Header';
 import {Login} from './Components/Login/Login';
 
 function App() {
