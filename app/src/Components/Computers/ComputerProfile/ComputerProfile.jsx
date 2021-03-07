@@ -2,26 +2,20 @@ import {Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Button
 import Paper from '@material-ui/core/Paper'
 import axios from "axios";
 import React, {useState} from "react";
-import style from './ComputersList.module.css'
+import style from './ComputerProfile.module.css'
 
-interface IComps {
-    title: string,
-    kernel_version: string,
-    product_type: string,
-    product_version: string,
-    processor_type: string,
-    physical_memory: string,
-    video_driver: string,
-    created_at: string
-}
 
-export const ComputerList: React.FC = () => {
+export const ComputerProfile = () => {
 
-    const [computersList, setComputerList] = useState<IComps[]>([])
+    const [computerApps, setComputerApps] = useState([])
+
+    let makeFile = axios.get('http://127.0.0.1:8000/computers/script/')
+    let getComputerInfo = axios.get('http://127.0.0.1:8000/computers/')
+
 
     let getInfo = () => axios
-        .get('http://127.0.0.1:8000/computers/')
-        .then(response => setComputerList(response.data))
+        .all([makeFile, getComputerInfo])
+        .then(axios.spread((...responses) => setComputerApps(responses[1].data)))
 
     return (
         <div className={style.listBlock}>
@@ -39,7 +33,7 @@ export const ComputerList: React.FC = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {computersList.map((row) => (
+                        {computerApps.map((row) => (
                             <TableRow key={row.title}>
                                 <TableCell>
                                     {row.title}

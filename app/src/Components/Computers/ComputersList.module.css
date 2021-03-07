@@ -1,0 +1,29 @@
+
+.listBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    overflow: hidden;
+}
+
+.formField {
+    margin-bottom: 10px !important;
+}
+
+.table {
+    width: 20% !important;
+    margin-left: 10px;
+}
+
+.link {
+    color: #000;
+    text-decoration: none;
+}
+
+.buttonsBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+}

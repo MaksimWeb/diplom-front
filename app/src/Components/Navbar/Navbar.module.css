@@ -1,0 +1,43 @@
+.icon {
+    margin-right: 20px;
+}
+
+.button__group {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    color: #fff;
+    border: none !important;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.username {
+    color: #fff;
+}
+
+.username:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.username:active {
+    cursor: pointer;
+    color: #2b0303;
+}
+
+.navBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logout:hover {
+    cursor: pointer;
+    color: red;
+}
