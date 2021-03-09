@@ -3,22 +3,26 @@ import Paper from '@material-ui/core/Paper'
 import axios from "axios";
 import React, {useState} from "react";
 import style from './ComputerProfile.module.css'
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
 
 
-export const ComputerProfile = () => {
+export const ComputerProfile = (props) => {
+
+    let computerTitle = props.match.params.title;
 
     const [computerApps, setComputerApps] = useState([])
     const [applications, setApplications] = useState([])
 
     let makeFile = axios.get('http://127.0.0.1:8000/computers/script/')
-    let getComputerInfo = axios.get('http://127.0.0.1:8000/computers/')
-    let getApplicationsInfo = axios.get('http://127.0.0.1:8000/computers/applications')
+    let getComputerInfo = axios.get(`http://127.0.0.1:8000/computers/${computerTitle}`)
+    let getApplicationsInfo = axios.get(`http://127.0.0.1:8000/computers/applications/${computerTitle}`)
 
 
     let getInfo = () => axios
         .all([makeFile, getComputerInfo, getApplicationsInfo])
         .then(axios.spread((...responses) => {
-            setComputerApps(responses[1].data)
+            setComputerApps([responses[1].data])
             setApplications(responses[2].data)
         }))
 
@@ -75,3 +79,8 @@ export const ComputerProfile = () => {
         </div>
     )
 }
+
+let withURLDataContainer = withRouter(ComputerProfile);
+
+
+export default connect(null, {})(withURLDataContainer)

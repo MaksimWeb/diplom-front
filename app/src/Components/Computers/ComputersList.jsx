@@ -14,9 +14,19 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import {Field, Form, Formik} from "formik";
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
+import {connect} from "react-redux";
 
-export const ComputerList = () => {
+const ComputerList = (props) => {
+
+    const [computersList, setComputersList] = useState([])
+
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/computers/')
+            .then(response => {
+                setComputersList(response.data)
+            })
+    }, [computersList])
 
     let filter = (computerName) => {
         let newComputersArr = computersList.filter(el => {
@@ -35,15 +45,6 @@ export const ComputerList = () => {
                 setComputersList(response.data)
             })
     }
-
-    const [computersList, setComputersList] = useState([])
-
-    useEffect(() => {
-        axios.get('http://127.0.0.1:8000/computers/')
-            .then(response => {
-                setComputersList(response.data)
-            })
-    }, [computersList])
 
     // let filter = useCallback((computerName) => {
     //
@@ -73,9 +74,15 @@ export const ComputerList = () => {
 
                                 <TableRow hover key={row.title}>
                                     <TableCell>
-                                        <NavLink className={style.link} to={`/computer/${row.title}`}>
-                                            {row.title}
-                                        </NavLink>
+                                        {props.isAuth ?
+                                            <NavLink className={style.link} to={`/computer/${row.title}`}>
+                                                {row.title}
+                                            </NavLink>
+                                            :
+                                            <span>
+                                                  {row.title}
+                                            </span>
+                                        }
                                     </TableCell>
                                 </TableRow>
                             ))}
@@ -120,3 +127,12 @@ const FilterForm = (props) => {
         </div>
     )
 }
+
+let mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.token
+    }
+
+}
+
+export default connect(mapStateToProps, {}) (ComputerList)

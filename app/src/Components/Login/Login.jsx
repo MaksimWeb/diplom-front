@@ -6,8 +6,7 @@ import style from './Login.module.css';
 import {BiShowAlt} from 'react-icons/bi';
 import {login} from "../Redux/auth-reducer";
 import {connect} from "react-redux";
-import {Redirect} from "react-router";
-import {usersAPI} from "../../Api/Api";
+import {Redirect} from "react-router-dom";
 
 export const Login = (props) => {
 

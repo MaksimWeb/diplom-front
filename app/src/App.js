@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {ComputerList} from "./Components/Computers/ComputersList";
+import ComputerList from "./Components/Computers/ComputersList";
 import {Route} from 'react-router-dom';
 import Header from './Components/Header/Header';
 import Login from './Components/Login/Login';
-import {ComputerProfile} from "./Components/Computers/ComputerProfile/ComputerProfile";
+import ComputerProfile from "./Components/Computers/ComputerProfile/ComputerProfile";
 import {connect} from "react-redux";
 import {authCheckState} from "./Components/Redux/auth-reducer";
 
