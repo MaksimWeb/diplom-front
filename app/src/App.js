@@ -7,6 +7,10 @@ import Login from './Components/Login/Login';
 import ComputerProfile from "./Components/Computers/ComputerProfile/ComputerProfile";
 import {connect} from "react-redux";
 import {authCheckState} from "./Components/Redux/auth-reducer";
+import AdminTest from "./Components/AdminTest/AdminTest";
+import AdminResult from "./Components/AdminResults/AdminResults";
+import UserTest from "./Components/UserTest/UserTest";
+import UserResults from "./Components/UserResults/UserResults";
 
 function App(props) {
 
@@ -21,6 +25,10 @@ function App(props) {
                 <Route path='/computers' render={() => <ComputerList/>}/>
                 <Route path={'/computer/:title?'} render={() => <ComputerProfile/>}/>
                 <Route path='/login' render={() => <Login/>}/>
+                <Route path='/admin-test' render={() => <AdminTest/>}/>
+                <Route path='/admin-results' render={() => <AdminResult/>}/>
+                <Route path='/user-test' render={() => <UserTest/>}/>
+                <Route path='/user-results' render={() => <UserResults/>}/>
             </div>
         </div>
     );

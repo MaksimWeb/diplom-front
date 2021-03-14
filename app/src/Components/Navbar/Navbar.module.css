@@ -11,6 +11,7 @@
 .button {
     color: #fff;
     border: none !important;
+    text-transform: none;
 }
 
 .link {
@@ -40,4 +41,9 @@
 .logout:hover {
     cursor: pointer;
     color: red;
+}
+
+.testLink {
+    text-decoration: none;
+    color: #000;
 }

@@ -1,11 +1,13 @@
 import {applyMiddleware, combineReducers, createStore, compose} from "redux";
 import thunkMiddleware from "redux-thunk";
 import {authReducer} from './auth-reducer';
-import {computersReducer} from './computers-reducer';
+import {adminTestReducer} from "./admin-test-reducer";
+import {userTestReducer} from "./user-test-reducer";
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    // computers: computersReducer
+    adminTest: adminTestReducer,
+    userTest: userTestReducer
 });
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

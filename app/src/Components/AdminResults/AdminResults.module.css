@@ -1,0 +1,16 @@
+.circleCard {
+    margin-top: 100px;
+}
+
+.card {
+    width: 275px;
+    margin: 0 auto;
+}
+
+.circle {
+    transform: translateX(240%);
+}
+
+.link {
+    text-decoration: none;
+}
