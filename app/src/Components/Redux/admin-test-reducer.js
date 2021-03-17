@@ -1,202 +1,35 @@
+import {resultsAPI, testAPI} from "../../Api/Api";
+import {useDispatch} from "react-redux";
+
+const SET_QUESTIONS = 'SET_QUESTIONS'
 const SET_SCORE = 'SET_SCORE'
 const SET_CHOICE = 'SET_CHOICE'
 const SET_RESULTS = 'SET_RESULTS'
+const SET_ANSWERS = 'SET_ANSWERS'
 
 let initialState = {
-    quiz: [
-        {
-            question: 'Кем производится корректировка списка учетных записей пользователей (заведение, активация, блокирования, уничтожение) ?',
-            answers: [
-                {
-                    value: 'Руководителем структурного подразделения',
-                    correct: false
-                },
-                {
-                    value: 'Администратором безопасности',
-                    correct: true
-                },
-                {
-                    value: 'Самим пользователем',
-                    correct: false
-                },
-                {
-                    value: 'Сотрудником отдела кадров',
-                    correct: false
-                },
-            ]
-        },
-        {
-            question: 'В каких случаях производится блокирования учетных записей пользователей?',
-            answers: [
-                {
-                    value: 'Временных учетных записей пользователей по окончании установленного периода времени для их использования',
-                    correct: true
-                },
-                {
-                    value: 'Неактивных (неиспользуемых) учетных записей пользователей после периода времени неиспользования [2 УПД.1]',
-                    correct: true
-                },
-                {
-                    value: 'Учетной записи пользователя, при превышении установленного числа неуспешных попыток аутентификации пользователя [2 ИАФ.4]',
-                    correct: true
-                },
-                {
-                    value: 'Учетной записи пользователя, при выявлении по результатам мониторинга (просмотра, анализа) журналов регистрации событий безопасности действий пользователей, которые отнесены к событиям нарушения безопасности информации [2 РСБ.1]',
-                    correct: true
-                },
-            ]
-        },
-        {
-            question: 'Действия администратора в ходе управления средствами аутенфикации',
-            answers: [
-                {
-                    value: 'Изменить минимальную сложность пароля',
-                    correct: true
-                },
-                {
-                    value: 'Присваивает идентификатор пользователю или устройству',
-                    correct: false
-                },
-                {
-                    value: 'Проверка компонентов ИС на наличие вредоносных компьютерных программ не менее одного раза в неделю',
-                    correct: false
-                },
-                {
-                    value: 'Получение уведомления о необходимости обновлений базы решающих правил',
-                    correct: false
-                },
-            ]
-        },
-        {
-            question: 'Действия администратора в ходе управления системами обнаружения вторжения',
-            answers: [
-                {
-                    value: 'Изменить минимальное количество измененных символов при создании новых паролей',
-                    correct: false
-                },
-                {
-                    value: 'Предотвращает повторное использование идентификатора пользователя и (устройства) в течение установленного периода времени [2 ИАФ.3];',
-                    correct: false
-                },
-                {
-                    value: 'Проверка при загрузке, открытии или исполнении объектов (файлов) из внешних источников во времени, близкому к реальному',
-                    correct: false
-                },
-                {
-                    value: 'Установка обновлений базы решающих правил из доверенных источников',
-                    correct: true
-                },
-            ]
-        },
-        {
-            question: 'Действия администратора в ходе управления средствами контроля носителей',
-            answers: [
-                {
-                    value: 'Определение и выполнение действий по реагированию на обнаружение в ИС объектов, подвергшихся заражению вредоносными компьютерными программами (вирусами)',
-                    correct: false
-                },
-                {
-                    value: 'Формирует идентификатор, который однозначно идентифицирует пользователя или устройство',
-                    correct: false
-                },
-                {
-                    value: 'Определение и поддержание в актуальном состоянии списка пользователей, уполномоченных на доступ к МНИ',
-                    correct: true
-                },
-                {
-                    value: 'Запись во временное хранилище информации для анализа и принятия решения о возможности ее дальнейшей передачи',
-                    correct: false
-                },
-            ]
-        },
-        {
-            question: 'Действия администратора в ходе управления межсетевыми экранами',
-            answers: [
-                {
-                    value: 'Определение и выполнение действий по реагированию на обнаружение в ИС объектов, подвергшихся заражению вредоносными компьютерными программами (вирусами).',
-                    correct: false
-                },
-                {
-                    value: 'Контроль за передачей и фильтрацией информационных потоков в соответствии с правилами управления потоками',
-                    correct: true
-                },
-                {
-                    value: 'Запись во временное хранилище информации для анализа и принятия решения о возможности ее дальнейшей передачи',
-                    correct: true
-                },
-                {
-                    value: 'Определение или уточнение пользователей ИС, уполномоченных на ввод (вывод) информации на машинные носители',
-                    correct: false
-                },
-                {
-                    value: 'Определение или уточнение разрешенные для ввода (вывода) информации интерфейсы',
-                    correct: false
-                },
-            ]
-        },
-        {
-            question: 'На какие этапы подразделяется реагирование на инциденты информационной безопасности?',
-            answers: [
-                {
-                    value: 'Подготовительный этап',
-                    correct: true
-                },
-                {
-                    value: 'Этап уничтожения вирусов',
-                    correct: false
-                },
-                {
-                    value: 'Этап резервного копирования ИС',
-                    correct: false
-                },
-                {
-                    value: 'Этап обнаружения инцидентов',
-                    correct: true
-                },
-                {
-                    value: 'Этап формирования выводов',
-                    correct: true
-                },
-            ]
-        },
-        {
-            question: 'Включает ли в себя этап сдержевания инцидентов изоляцию инф инфицированных машин ?',
-            answers: [
-                {
-                    value: 'Да',
-                    correct: true
-                },
-                {
-                    value: 'Нет',
-                    correct: false
-                },
-            ]
-        },
-        {
-            question: 'При использовании отказоустойчивых тех средств администратором безопасности должны быть обеспечены следующие меры:',
-            answers: [
-                {
-                    value: 'Определение и поддержание в актуальном состоянии перечня отказоустойчивых технических средств',
-                    correct: true
-                },
-                {
-                    value: 'Актуализация сегментов ИС, в которых должно осуществляться резервирование',
-                    correct: false
-                },
-                {
-                    value: 'Определение и поддержание в актуальном состоянии перечня резервируемых средств',
-                    correct: false
-                },
-            ]
-        },
-    ],
+    quiz: [],
     score: null,
     choice: null,
     results: null
 }
 
+let stateCopy;
+let resultsCopy;
+
 export const adminTestReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_QUESTIONS:
+            let quiz = []
+            for (let i of action.questions) {
+                let answers = action.answers.filter(el => el.question === i.id)
+                quiz.push({question: i.text, answers: [...answers]})
+            }
+            return {
+                ...state,
+                quiz: [...quiz]
+            }
+
         case SET_SCORE:
             return {
                 ...state,
@@ -208,24 +41,46 @@ export const adminTestReducer = (state = initialState, action) => {
                 choice: action.chosenAnswer
             }
         case SET_RESULTS:
+            resultsCopy = action.results
             return {
                 ...state,
                 results: action.results
             }
+        case SET_ANSWERS:
+            stateCopy = [...state.quiz]
+            return state
+
         default:
             return state;
     }
 }
 
 let correctAnswers = 0
-const setScore = (isCorrect) => {
-    if (isCorrect) {
-        correctAnswers++
+const setScore = (answer, num) => {
+    let numOfAns = 0;
+    for (let i of answer) {
+        if (i.correct && answer.length === 1 && num === 1) {
+            correctAnswers++
+        } else if (i.correct && answer.length !== 1) {
+            numOfAns++
+        }
     }
 
-    return {
-        type: SET_SCORE,
-        score: correctAnswers
+    if (num === 1) {
+        return {
+            type: SET_SCORE,
+            score: correctAnswers
+        }
+    } else if (num !== 1 && numOfAns === num) {
+        return {
+            type: SET_SCORE,
+            score: ++correctAnswers
+        }
+    } else {
+        return {
+            type: SET_SCORE,
+            score: correctAnswers
+        }
     }
 }
 
@@ -236,17 +91,61 @@ export const quizChoice = (chosenAnswer) => {
     }
 }
 
+export const setAnswers = () => {
+    return {
+        type: SET_ANSWERS,
+    }
+}
+
 export const quizChoiceThunk = (choice, currentQuestion) => (dispatch) => {
-    let chosenAnswer = initialState.quiz[currentQuestion].answers.filter(el => el.value === choice)
+    dispatch(setAnswers())
+    let chosenAnswer = stateCopy[currentQuestion].answers.filter(el => el.text === choice)
+    let numOfCorrect = stateCopy[currentQuestion].answers.filter(item => item.correct === true)
+    if (typeof choice === 'object') {
+        chosenAnswer = stateCopy[currentQuestion].answers.filter(el => {
+            for (let i of choice) {
+                if (el.text === i) {
+                    return true
+                }
+            }
+        })
+    }
+
     dispatch(quizChoice(chosenAnswer))
-    dispatch(setScore(chosenAnswer[0].correct))
+    dispatch(setScore(chosenAnswer, numOfCorrect.length))
 }
 
 export const showResults = () => {
-    let results = Math.ceil(correctAnswers * 100 / initialState.quiz.length)
+    let results = Math.ceil(correctAnswers * 100 / stateCopy.length)
     correctAnswers = 0
     return {
         type: SET_RESULTS,
         results
     }
+}
+
+export const setTest = (questions, answers) => {
+    return {
+        type: SET_QUESTIONS,
+        questions,
+        answers
+    }
+}
+
+export const getQuestionsThunk = (quizId) => (dispatch) => {
+    testAPI.getQuestions()
+        .then(res => res.filter(el => el.quiz === quizId))
+        .then(res => {
+            testAPI.getAnswers()
+                .then(r => dispatch(getTestThunk(res, r)))
+        })
+}
+
+export const getTestThunk = (questions, answers) => (dispatch) => {
+    dispatch(setTest(questions, answers))
+}
+
+export const setResultsThunk = (quiz, user) => (dispatch) => {
+    resultsAPI.setResults(parseInt(quiz), parseInt(user), resultsCopy)
+        .then(res => console.log(res))
 }

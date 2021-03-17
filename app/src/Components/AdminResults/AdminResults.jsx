@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import {useSelector} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import style from "./AdminResults.module.css"
 import {Button, Card, CardActions, CardContent} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
+import {getQuestionsThunk} from "../Redux/admin-test-reducer";
 
 const Circular = (props) => {
     return (
@@ -38,8 +39,8 @@ Circular.propTypes = {
     value: PropTypes.number.isRequired,
 };
 
-const AdminResult = () => {
-    const resultSelector = useSelector(state => state.adminTest.results);
+const AdminResult = (props) => {
+    const resultSelector = useSelector(state => state.Test.results);
 
     return (
         <div className={style.circleCard}>
@@ -51,8 +52,8 @@ const AdminResult = () => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <NavLink className={style.link} to={'/admin-test'}>
-                        <Button variant="contained" color="primary" size="small">Пройти тест заново</Button>
+                    <NavLink className={style.link} to={`/test/${1}`}>
+                        <Button onClick={props.getQuestionsThunk(1)} variant="contained" color="primary" size="small">Пройти тест заново</Button>
                     </NavLink>
                 </CardActions>
             </Card>
@@ -61,4 +62,4 @@ const AdminResult = () => {
     )
 }
 
-export default AdminResult;
+export default connect (null, {getQuestionsThunk}) (AdminResult);

@@ -16,6 +16,7 @@ import style from './Navbar.module.css'
 import {NavLink} from 'react-router-dom';
 import {connect} from "react-redux";
 import {logout} from "../Redux/auth-reducer";
+import {getQuestionsThunk} from "../Redux/admin-test-reducer";
 
 
 const Navbar = (props) => {
@@ -88,13 +89,13 @@ const Navbar = (props) => {
                                             <ClickAwayListener onClickAway={handleClose}>
                                                 <MenuList autoFocusItem={open} id="menu-list-grow"
                                                           onKeyDown={handleListKeyDown}>
-                                                    <MenuItem onClick={handleClose}>
-                                                        <NavLink className={style.testLink} to={'/admin-test'}>
+                                                    <MenuItem onClick={(event) => {handleClose(event); props.getQuestionsThunk(1)}}>
+                                                        <NavLink className={style.testLink} to={`/test/${1}`}>
                                                             Тест администратора
                                                         </NavLink>
                                                     </MenuItem>
-                                                    <MenuItem onClick={handleClose}>
-                                                        <NavLink className={style.testLink} to={'/user-test'}>
+                                                    <MenuItem onClick={(event) => {handleClose(event); props.getQuestionsThunk(2)}}>
+                                                        <NavLink className={style.testLink} to={`/test/${2}`}>
                                                             Тест персонала
                                                         </NavLink>
                                                     </MenuItem>
@@ -105,6 +106,11 @@ const Navbar = (props) => {
                                 )}
                             </Popper>
                         </div>
+                        <MenuItem>
+                            <NavLink className={style.link} to='/results-list'>
+                                <Typography variant='h5' className={style.button}>Результаты тестов</Typography>
+                            </NavLink>
+                        </MenuItem>
                     </MenuList>
                     {props.isAuth ?
                         <div>
@@ -120,4 +126,4 @@ const Navbar = (props) => {
     )
 }
 
-export default connect(null, {logout})(Navbar)
+export default connect(null, {logout, getQuestionsThunk})(Navbar)

@@ -13,3 +13,8 @@
 .questionCount {
     margin-bottom: 20px;
 }
+
+.buttonGroup {
+    display: flex;
+    column-gap: 10px;
+}
