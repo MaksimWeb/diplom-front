@@ -8,20 +8,14 @@ import axios from "axios";
 const ResultList = (props) => {
 
     const [resultList, setResultList] = useState([])
-    const [quizList, setQuizList] = useState([])
-    const [userList, setUserList] = useState([])
-
-    let getQuizes = axios.get('http://127.0.0.1:8000/quizes/')
-    let users = axios.get(`http://127.0.0.1:8000/computers/users/`)
-    let getResults = axios.get(`http://127.0.0.1:8000/results`)
 
 
     useEffect(() => {
-        axios.all([getQuizes, users, getResults])
+        let getResults = axios.get(`http://127.0.0.1:8000/results`)
+        axios.all([getResults])
             .then(axios.spread((...responses) => {
-                setResultList(responses[2].data)
-                setQuizList(responses[0].data)
-                setUserList(responses[1].data)
+                console.log(responses[0].data)
+                setResultList(responses[0].data)
             }))
     }, [])
 
@@ -55,8 +49,8 @@ const ResultList = (props) => {
                             resultList.map((row) => (
 
                                 <TableRow hover key={row.title}>
-                                    <TableCell align="left">{row.quiz}</TableCell>
-                                    <TableCell align="left">{row.user}</TableCell>
+                                    <TableCell align="left">{row.quiz.topic}</TableCell>
+                                    <TableCell align="left">{row.user.username}</TableCell>
                                     <TableCell align="left">{row.score} %</TableCell>
                                     <TableCell align="left">{row.created}</TableCell>
                                 </TableRow>
