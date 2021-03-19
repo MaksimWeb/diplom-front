@@ -19,19 +19,6 @@ const ResultList = (props) => {
             }))
     }, [])
 
-    // const [r, setR] = useState([])
-    //
-    // for (let i of resultList) {
-    //     for (let o of quizList) {
-    //         if (i.quiz === o.id) {
-    //             setR({
-    //                 quiz: o.topic,
-    //
-    //             })
-    //         }
-    //     }
-    // }
-
     return (
         <div>
             <TableContainer className={style.table} component={Paper}>
