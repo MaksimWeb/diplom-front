@@ -11,6 +11,7 @@ import Test from "./Components/AdminTest/Test";
 import AdminResult from "./Components/AdminResults/AdminResults";
 import UserResult from "./Components/UserResults/UserResults";
 import ResultList from "./Components/ResultList/ResultList";
+import DocsList from "./Components/DocsList/DocsList";
 
 function App(props) {
 
@@ -29,6 +30,7 @@ function App(props) {
                 <Route path='/admin-results' render={() => <AdminResult/>}/>
                 <Route path='/user-results' render={() => <UserResult/>}/>
                 <Route path='/results-list' render={() => <ResultList/>}/>
+                <Route path='/docs' render={() => <DocsList/>}/>
             </div>
         </div>
     );

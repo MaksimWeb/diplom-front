@@ -26,18 +26,18 @@ const ComputerList = (props) => {
             .then(response => {
                 setComputersList(response.data)
             })
-    }, [computersList])
+    }, [])
 
-    let filter = (computerName) => {
-        let newComputersArr = computersList.filter(el => {
-            let title = el.title
-            if (title.includes(computerName.toUpperCase())) return true;
-
-            return false;
-        })
-
-        newComputersArr.length >= 1 && setComputersList(newComputersArr)
-    }
+    // let filter = (computerName) => {
+    //     let newComputersArr = computersList.filter(el => {
+    //         let title = el.title.toUpperCase()
+    //         if (title.includes(computerName.toUpperCase())) return true;
+    //
+    //         return false;
+    //     })
+    //
+    //     newComputersArr.length >= 1 && setComputersList(newComputersArr)
+    // }
 
     let reset = () => {
         axios.get('http://127.0.0.1:8000/computers/')
@@ -46,17 +46,17 @@ const ComputerList = (props) => {
             })
     }
 
-    // let filter = useCallback((computerName) => {
-    //
-    //     let newComputersArr = computersList.filter(el => {
-    //         let title = el.title
-    //         if (title.includes(computerName.toUpperCase())) return true;
-    //
-    //         return false;
-    //     })
-    //
-    //     newComputersArr.length >= 1 && setComputersList(newComputersArr)
-    // }, [setComputersList])
+    let filter = useCallback((computerName) => {
+
+        let newComputersArr = computersList.filter(el => {
+            let title = el.title.toUpperCase()
+            if (title.includes(computerName.toUpperCase())) return true;
+
+            return false;
+        })
+
+        newComputersArr.length >= 1 && setComputersList(newComputersArr)
+    }, [computersList])
 
     return (
         <div className={style.listBlock}>

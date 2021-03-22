@@ -66,7 +66,7 @@ const Navbar = (props) => {
                             </NavLink>
                         </MenuItem>
                         <MenuItem>
-                            <NavLink className={style.link} to='/computers'>
+                            <NavLink className={style.link} to='/docs'>
                                 <Typography variant='h5' className={style.button}>Список документов</Typography>
                             </NavLink>
                         </MenuItem>
