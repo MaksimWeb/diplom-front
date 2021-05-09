@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import style from './ComputersList.module.css'
 import Paper from "@material-ui/core/Paper";
 import {
-    Button,
+    Button, Container,
     InputLabel,
     Table,
     TableBody,
@@ -28,17 +28,6 @@ const ComputerList = (props) => {
             })
     }, [])
 
-    // let filter = (computerName) => {
-    //     let newComputersArr = computersList.filter(el => {
-    //         let title = el.title.toUpperCase()
-    //         if (title.includes(computerName.toUpperCase())) return true;
-    //
-    //         return false;
-    //     })
-    //
-    //     newComputersArr.length >= 1 && setComputersList(newComputersArr)
-    // }
-
     let reset = () => {
         axios.get('http://127.0.0.1:8000/computers/')
             .then(response => {
@@ -59,37 +48,39 @@ const ComputerList = (props) => {
     }, [computersList])
 
     return (
-        <div className={style.listBlock}>
-            <FilterForm filter={filter} reset={reset}/>
-            <TableContainer className={style.table} component={Paper}>
-                <Table size="small" aria-label="a dense table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="left">Название ПК</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            computersList.map((row) => (
+       <Container maxWidth={"xl"}>
+           <div className={style.listBlock}>
+               <FilterForm filter={filter} reset={reset}/>
+               <TableContainer className={style.table} component={Paper}>
+                   <Table size="small" aria-label="a dense table">
+                       <TableHead>
+                           <TableRow>
+                               <TableCell align="left">Название ПК</TableCell>
+                           </TableRow>
+                       </TableHead>
+                       <TableBody>
+                           {
+                               computersList.map((row) => (
 
-                                <TableRow hover key={row.title}>
-                                    <TableCell>
-                                        {props.isAuth ?
-                                            <NavLink className={style.link} to={`/computer/${row.title}`}>
-                                                {row.title}
-                                            </NavLink>
-                                            :
-                                            <span>
+                                   <TableRow hover key={row.title}>
+                                       <TableCell>
+                                           {props.isAuth ?
+                                               <NavLink className={style.link} to={`/computer/${row.title}`}>
+                                                   {row.title}
+                                               </NavLink>
+                                               :
+                                               <span>
                                                   {row.title}
                                             </span>
-                                        }
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </div>
+                                           }
+                                       </TableCell>
+                                   </TableRow>
+                               ))}
+                       </TableBody>
+                   </Table>
+               </TableContainer>
+           </div>
+       </Container>
     )
 }
 
